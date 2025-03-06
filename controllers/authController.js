@@ -33,8 +33,10 @@ const registerUser = async (req, res) => {
             if (!age || !gender) {
                 return res.status(400).json({ message: "Age and gender are required for patients" });
             }
-            const newPatient = new Patient({ userId: newUser._id, age, gender, medicalHistory });
+            const newPatient = new Patient({ userId: newUser._id, name, age, gender, medicalHistory });
             await newPatient.save();
+        }else if (role === "admin") {
+            // No additional model needed for admin, just register the user
         }
 
         res.status(201).json({ message: "User registered successfully" });

@@ -3,9 +3,10 @@ const Patient = require("../models/patientModel");
 // Create a New Patient
 const createPatient = async (req, res) => {
     try {
+      //  console.log("Request Body:", req.body);
         const { userId, name, age, gender, medicalHistory } = req.body;
 
-        if (!userId || !name || !age || !gender) {
+        if (!userId || !name || age===undefined || !gender) {
             return res.status(400).json({ message: "User ID, Name, Age, and Gender are required" });
         }
 

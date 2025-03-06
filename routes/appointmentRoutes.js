@@ -1,22 +1,14 @@
 const express = require("express");
-const { bookAppointment, getAllAppointments, getAppointmentById, updateAppointment, deleteAppointment } = require("../controllers/appointmentController");
+const { bookAppointment, viewAppointments } = require("../controllers/appointmentController");
 const authMiddleware = require("../middleware/authMiddleware");
+const authorizeRole = require("../middleware/roleMiddleware"); // Import role-based middleware
 
 const router = express.Router();
 
-// Book an Appointment (Patient)
-router.post("/", authMiddleware, bookAppointment);
+// ✅ Route: Only Admin can book an appointment
+router.post("/book", authMiddleware, authorizeRole("admin"), bookAppointment);
 
-// Get All Appointments
-router.get("/", authMiddleware, getAllAppointments);
-
-// Get Appointment by ID
-router.get("/:appointmentId", authMiddleware, getAppointmentById);
-
-// Update an Appointment
-router.put("/:appointmentId", authMiddleware, updateAppointment);
-
-// Delete an Appointment
-router.delete("/:appointmentId", authMiddleware, deleteAppointment);
+// ✅ Route: Only Doctor can view appointments
+router.get("/", authMiddleware, authorizeRole("doctor"), viewAppointments);
 
 module.exports = router;
