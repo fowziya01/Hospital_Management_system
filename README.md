@@ -17,8 +17,6 @@ API Endpoints
 
 Usage
 
-Screenshots
-
 Contributors
 
 License
@@ -59,97 +57,132 @@ Other Tools: dotenv, CORS
 
 1️⃣ Clone the Repository
 
+https://github.com/fowziya01/Hospital_Management_system.git
 
+2️⃣ Navigate to the Project Directory  
+   ```sh
+   cd repo Hospital_Management_system
 
+3️⃣ Install Dependencies
 
-
-
-
-
-
-
-
-
-
-
-bash
-Copy
-Edit
-git clone https://github.com/yourusername/hospital-management-system.git
-cd hospital-management-system
-2️⃣ Install Dependencies
-bash
-Copy
-Edit
 npm install
-3️⃣ Configure Environment Variables
-Create a .env file in the root directory:
 
-ini
-Copy
-Edit
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_email_password
-4️⃣ Run the Server
-bash
-Copy
-Edit
-npm start
-The server will run on http://localhost:5000
+4️⃣ Set Up Environment Variables
 
-🔐 Environment Variables
-Variable	Description
-PORT	Server port (default: 5000)
-MONGO_URI	MongoDB connection string
-JWT_SECRET	Secret key for JWT authentication
-EMAIL_USER	Email address for sending appointment emails
-EMAIL_PASS	Email password or app password
+Create a .env file in the root directory and add the following:
+
+MONGO_URI="mongodb://127.0.0.1:27017/HospitalMS?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.8"
+PORT=8081
+
+JWT_SECRET="shhhh"
+
+//app password
+
+EMAIL_USER="fowzijunaid@gmail.com"
+
+EMAIL_PASS="akrg zsia kzlj bpsn"
+
+5️⃣ Start the Server
+
+node server.js
+
+🚀 Server running on port 8081
+
+MongoDB Connected Successfully
+
 📡 API Endpoints
+
 🔹 Authentication
-Method	Endpoint	Description
-POST	/auth/signup	Register a new user
-POST	/auth/login	Login user
+
+Method	                   Endpoint	                     Description
+
+POST	                  api/auth/register	            Register a new user
+
+POST	                  api/auth/login	              Login user  with JWT authentication
+
 🔹 User Management (Admin Only)
-Method	Endpoint	Description
-GET	/users	Get all users
-DELETE	/users/:id	Delete a user
-🔹 Doctor Management (Admin Only)
-Method	Endpoint	Description
-POST	/doctors	Add a new doctor
-GET	/doctors	Get all doctors
+
+Method	                   Endpoint	                         Description
+
+GET	                      /users                         	Get all users
+
+DELETE	                  /users/:id	                    Delete a user
+
+🔹 Doctor Management (Admin and doctor only)
+
+Method	                   Endpoint	                          Description
+
+POST	                    api/doctors/	                      Add a new doctor (Added only by admin)
+
+GET                       api/doctors/                      	Get all doctors(Accessible to All Authenticated Users)
+
+GET                        api/doctors/:doctorId               Get doctors by Id (Accessible to All Authenticated Users)
+
+PUT                        api/doctors/:doctorId                Find by Id and updating (Only Admin)
+
+DELETE                     api/doctors/:doctorId                 Find by Id and delete (Only Admin)
+
+🔹 Patients
+
+Method	                         Endpoint                             	Description
+
+POST                        api/patients/create                       Create a new patients
+
+GET                         api/patients/                             Get all patients (Only accessible to doctors)
+
+GET                         api/patients/:id                          Get patients by Id (Only accessible to doctors)
+                   
+                     
 🔹 Appointments
-Method	Endpoint	Description	Access
-POST	/appointments	Book an appointment	Patient
-GET	/appointments	View all appointments	Admin, Doctor
-DELETE	/appointments/:id	Cancel an appointment	Admin, Patient
+
+Method	                         Endpoint                             	Description
+
+POST	                          api/appointments /book               	Book an appointment	Patient only by admin
+
+GET                              api/appointments/                      Only Doctor can view appointments
+
 🎯 Usage
+
 1️⃣ Register & Login
+
 Users sign up and log in using JWT authentication.
+
 Admin assigns roles to users (Admin, Doctor, Patient).
+
 2️⃣ Role-Based Access Control (RBAC)
+
 Admin: Can manage doctors, users, and appointments.
+
 Doctor: Can view assigned appointments.
+
 Patient: Can book and cancel appointments.
+
 3️⃣ Book an Appointment (Patients)
+
 Patients send a POST request to /appointments with doctor details.
+
 A confirmation email is sent using Nodemailer.
+
 4️⃣ View Appointments (Doctors)
-Doctors send a GET request to /appointments to view schedules.
-📸 Screenshots
-Appointment Booking	Email Confirmation
+
+Doctors send a GET request to /appointments to view schedule
+
 🤝 Contributors
-👩‍💻 Your Name - Backend Developer
+
+👩‍💻 FOWZIYA BEGAM - Backend Developer
+
 👨‍💻 Contributor 2 - Database Manager
+
 Want to contribute? Feel free to create a Pull Request!
 
 📜 License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 🌟 Star the Repo!
+
 If you found this project helpful, please ⭐ the repository to show your support!
+
 
 
 
